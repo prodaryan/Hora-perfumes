@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora Perfume | Luxury Fragrances at Retailer Prices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #1a1a1a;
+            --gold: #d4af37;
+            --cream: #f5f5f0;
+            --white: #ffffff;
+            --gray: #666666;
+            --success: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--cream);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--black);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            background-color: var(--black);
+            color: var(--cream);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #cccccc;
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gold);
+            color: var(--black);
+        }
+
+        /* Perfume Grid */
+        .perfume-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .perfume-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .perfume-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .perfume-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Add to Bag */
+        .bag-checkbox {
+            display: none;
+        }
+
+        .add-to-bag {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--gold);
+            color: var(--black);
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .add-to-bag:hover {
+            background-color: #b8941f;
+        }
+
+        .add-to-bag .added-text {
+            display: none;
+        }
+
+        .bag-checkbox:checked + .add-to-bag .default-text {
+            display: none;
+        }
+
+        .bag-checkbox:checked + .add-to-bag .added-text {
+            display: inline;
+        }
+
+        .bag-checkbox:checked + .add-to-bag {
+            background-color: var(--success);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-top: 0.5rem;
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        /* Bag Section */
+        .bag-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .bag-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .bag-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border-radius: 4px;
+        }
+
+        .bag-item-info {
+            flex-grow: 1;
+        }
+
+        .bag-item-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .bag-item-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .remove-btn {
+            padding: 0.5rem 1rem;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .empty-bag {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+
+        /* Show bag items based on checkbox state */
+        .bag-checkbox:not(:checked) ~ .bag-section .bag-item { display: none; }
+        .bag-checkbox:checked ~ .bag-section .bag-item { display: flex; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">HORA</div>
+            <nav>
+                <ul>
+                    <li><a href="#designers">Designers</a></li>
+                    <li><a href="#dupes">Dupes</a></li>
+                    <li><a href="#bag">Bag</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>HORA PERFUME</h1>
+        <p>Luxury fragrances at normal retailer prices. Shop authentic designer perfumes and high-quality dupes with no markup.</p>
+    </section>
+
+    <section id="designers">
+        <h2 class="section-title">Designer Perfumes</h2>
+        <div class="perfume-grid">
+            <!-- Chanel No.5 -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.29385.jpg" alt="Chanel No.5 Eau de Parfum">
+                <div class="card-content">
+                    <h3>Chanel No.5 Eau de Parfum</h3>
+                    <p class="brand">Chanel</p>
+                    <p class="price">$105</p>
+                    <input type="checkbox" id="chanel-no5" class="bag-checkbox">
+                    <label for="chanel-no5" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dior Sauvage -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.37324.jpg" alt="Dior Sauvage Eau de Toilette">
+                <div class="card-content">
+                    <h3>Dior Sauvage Eau de Toilette</h3>
+                    <p class="brand">Dior</p>
+                    <p class="price">$125</p>
+                    <input type="checkbox" id="dior-sauvage" class="bag-checkbox">
+                    <label for="dior-sauvage" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- YSL Black Opium -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.34987.jpg" alt="YSL Black Opium Eau de Parfum">
+                <div class="card-content">
+                    <h3>YSL Black Opium Eau de Parfum</h3>
+                    <p class="brand">Yves Saint Laurent</p>
+                    <p class="price">$95</p>
+                    <input type="checkbox" id="ysl-black-opium" class="bag-checkbox">
+                    <label for="ysl-black-opium" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Tom Ford Black Orchid -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.19545.jpg" alt="Tom Ford Black Orchid Eau de Parfum">
+                <div class="card-content">
+                    <h3>Tom Ford Black Orchid Eau de Parfum</h3>
+                    <p class="brand">Tom Ford</p>
+                    <p class="price">$145</p>
+                    <input type="checkbox" id="tomford-black-orchid" class="bag-checkbox">
+                    <label for="tomford-black-orchid" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Gucci Bloom -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.37567.jpg" alt="Gucci Bloom Eau de Parfum">
+                <div class="card-content">
+                    <h3>Gucci Bloom Eau de Parfum</h3>
+                    <p class="brand">Gucci</p>
+                    <p class="price">$85</p>
+                    <input type="checkbox" id="gucci-bloom" class="bag-checkbox">
+                    <label for="gucci-bloom" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Creed Aventus -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.13545.jpg" alt="Creed Aventus Eau de Parfum">
+                <div class="card-content">
+                    <h3>Creed Aventus Eau de Parfum</h3>
+                    <p class="brand">Creed</p>
+                    <p class="price">$350</p>
+                    <input type="checkbox" id="creed-aventus" class="bag-checkbox">
+                    <label for="creed-aventus" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dupes">
+        <h2 class="section-title">Perfume Dupes</h2>
+        <div class="perfume-grid">
+            <!-- Armaf Club de Nuit -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.29567.jpg" alt="Armaf Club de Nuit Intense Man">
+                <div class="card-content">
+                    <h3>Armaf Club de Nuit Intense Man</h3>
+                    <p class="brand">Armaf</p>
+                    <p class="price">$35</p>
+                    <input type="checkbox" id="armaf-club-de-nuit" class="bag-checkbox">
+                    <label for="armaf-club-de-nuit" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Lattafa Khamrah -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.49567.jpg" alt="Lattafa Khamrah Eau de Parfum">
+                <div class="card-content">
+                    <h3>Lattafa Khamrah Eau de Parfum</h3>
+                    <p class="brand">Lattafa</p>
+                    <p class="price">$30</p>
+                    <input type="checkbox" id="lattafa-khamrah" class="bag-checkbox">
+                    <label for="lattafa-khamrah" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Rasasi Hawas -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.39567.jpg" alt="Rasasi Hawas for Men">
+                <div class="card-content">
+                    <h3>Rasasi Hawas for Men</h3>
+                    <p class="brand">Rasasi</p>
+                    <p class="price">$25</p>
+                    <input type="checkbox" id="rasasi-hawas" class="bag-checkbox">
+                    <label for="rasasi-hawas" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Zara Vibrant Leather -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.59567.jpg" alt="Zara Vibrant Leather">
+                <div class="card-content">
+                    <h3>Zara Vibrant Leather</h3>
+                    <p class="brand">Zara</p>
+                    <p class="price">$20</p>
+                    <input type="checkbox" id="zara-vibrant-leather" class="bag-checkbox">
+                    <label for="zara-vibrant-leather" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Essex House No.5 -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.69567.jpg" alt="Essex House No.5">
+                <div class="card-content">
+                    <h3>Essex House No.5</h3>
+                    <p class="brand">Essex House</p>
+                    <p class="price">$15</p>
+                    <input type="checkbox" id="essex-no5" class="bag-checkbox">
+                    <label for="essex-no5" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dossier Ambery Sage -->
+            <div class="perfume-card">
+                <img src="https://fimgs.net/mdimg/perfume/375x500.79567.jpg" alt="Dossier Ambery Sage">
+                <div class="card-content">
+                    <h3>Dossier Ambery Sage</h3>
+                    <p class="brand">Dossier</p>
+                    <p class="price">$29</p>
+                    <input type="checkbox" id="dossier-ambery-sage" class="bag-checkbox">
+                    <label for="dossier-ambery-sage" class="add-to-bag">
+                        <span class="default-text">Add to Bag</span>
+                        <span class="added-text">Added ✓</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bag" class="bag-section">
+        <h2 class="section-title">Your Bag</h2>
+        <div class="empty-bag">Your bag is empty. Add some perfumes above!</div>
+    </section>
+
+    <footer>
+        <h3>HORA PERFUME</h3>
+        <p>© 2026 Hora Perfume. All rights reserved.</p>
+        <p>Authentic fragrances at retailer prices.</p>
+    </footer>
+</body>
+</html>
